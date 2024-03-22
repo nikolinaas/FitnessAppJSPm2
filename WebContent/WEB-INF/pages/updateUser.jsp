@@ -43,7 +43,7 @@ System.out.println(kor.getIme());
 	</div>
 	<div id="kategorije" class="col-10 main">
 		<div class="row" style="height: 10%;"></div>
-		<div class="row horizontalline justify-content-center">
+		<div class="row horizontalline justify-content-center align-items-center">
 			<label class="labelhorizontal justify-content-center"
 				style="color: aliceblue; font-size: 20px;">Izmjena podataka
 				korisnika</label>

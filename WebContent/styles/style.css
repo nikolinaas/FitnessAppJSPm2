@@ -139,3 +139,14 @@ a.btn {
 	max-height: 60%;
 	overflow-y: scroll;
 }
+.cardLogIn{
+	background-color: #004466;
+}
+.card-header{
+	font-size: 16px;
+}
+
+.card-body{
+	font-size: 12px;
+	
+}
