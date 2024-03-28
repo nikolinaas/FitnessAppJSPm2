@@ -14,16 +14,14 @@
 
 
 </head>
-<body>
-	<section>
+
 		<div
 			class="container d-flex align-items-center justify-content-center min-vh-100"
 			style="flex-direction: column;">
 
 			<div class="row ">
 
-				<div class="col-sm-12 col-md-12 col-lg-5 col-xl-5 "
-					style="width: 100%;">
+				
 					<div
 						class="card  text-white justify-content-center align-items-center cardLogIn"
 						style="border-radius: 5px; width: 100%;">
@@ -74,9 +72,7 @@
 			</div>
 
 
-		</div>
 
 
-	</section>
-</body>
+
 </html>

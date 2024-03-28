@@ -17,8 +17,8 @@ public class KategorijaDAO {
 	private static ConnectionPool connectionPool = ConnectionPool.getConnectionPool();
 	private static final String SQL_SELECT_CATEGORY_BY_ID = "SELECT * FROM kategorija WHERE idkategorija = ?";
 	private static final String SQL_SELECT_ALL_CATEGORIES = "SELECT * FROM kategorija";
-	private static final String SQL_INSERT_IN_CATEGORY = "INSERT INTO kategorija (nazivKategorija, opis_kategorije) VALUES (?,?)";
-	private static final String SQL_UPDATE_CATEGORY = "UPDATE kategorija SET nazivKategorija = ?, opis_kategorije = ? WHERE (idkategorija = ?)";
+	private static final String SQL_INSERT_IN_CATEGORY = "INSERT INTO kategorija (naziv_kategorija, opis_kategorije) VALUES (?,?)";
+	private static final String SQL_UPDATE_CATEGORY = "UPDATE kategorija SET naziv_kategorija = ?, opis_kategorije = ? WHERE (idkategorija = ?)";
 	private static final String SQL_DELETE_CATEGORY = "DELETE FROM kategorija WHERE (idkategorija = ?)";
 
 	public static ArrayList<Kategorija> getAll() {
@@ -32,7 +32,7 @@ public class KategorijaDAO {
 			PreparedStatement pstmt = DAOUtil.prepareStatement(connection, SQL_SELECT_ALL_CATEGORIES, false, values);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
-				res.add(new Kategorija(rs.getInt("idkategorija"),rs.getString("nazivKategorija"), rs.getString("opis_kategorije")));
+				res.add(new Kategorija(rs.getInt("idkategorija"),rs.getString("naziv_kategorija"), rs.getString("opis_kategorije")));
 			}
 			pstmt.close();
 		} catch (SQLException exp) {
@@ -81,7 +81,7 @@ public class KategorijaDAO {
 			rs = pstmt.executeQuery();
 			if (rs.next()){
 				
-			res = new Kategorija(rs.getInt("idkategorija"),rs.getString("nazivKategorija"), rs.getString("opis_kategorije")); 
+			res = new Kategorija(rs.getInt("idkategorija"),rs.getString("naziv_kategorija"), rs.getString("opis_kategorije")); 
 			
 			}
 
