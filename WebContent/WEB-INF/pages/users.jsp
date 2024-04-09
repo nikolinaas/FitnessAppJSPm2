@@ -69,7 +69,7 @@
 			<form id="myForm" action="?action=IzmijeniKorisnika" method="post">
 				<table class="table table-bordered">
 					<tr>
-						<th>JMBG</th>
+						<th>ID</th>
 						<th>Ime</th>
 						<th>Prezime</th>
 						<th>Email</th>
@@ -83,7 +83,7 @@
 					%>
 					<tr class="trclass" id="tablerowUser" onclick="selectRow(this)">
 						<%
-						out.println("<td>" + korisnik.getJMBG() + "</td>");
+						out.println("<td>" + korisnik.getId() + "</td>");
 						out.println("<td>" + korisnik.getIme() + "</td>");
 						out.println("<td>" + korisnik.getPrezimme() + "</td>");
 						out.println("<td>" + korisnik.getEmail() + "</td>");
@@ -93,7 +93,7 @@
 						out.println("<td>" + korisnik.getNalog().getLozinka() + "</td>");
 						%>
 					
-						<td><a class="btn btnhover" href="?action=obrisiKorisnika-<%=korisnik.getJMBG()%>">Obri&scaron;i</a></td>
+						<td><a class="btn btnhover" href="?action=obrisiKorisnika-<%=korisnik.getId()%>">Obri&scaron;i</a></td>
 					</tr>
 					
 					<%

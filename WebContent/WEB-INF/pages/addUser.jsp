@@ -42,9 +42,6 @@
 			<div class="col-1"></div>
 			<div class="col-10 info-div">
 				<form method="post" action="?action=saveUser">
-				<label>JMBG</label>
-				<input class="form-control" type="text" name="jmbg" id="jmbg"> 
-				<br/>
 				<label>Ime</label>
 				<input type="text" class="form-control" name="imeKorisnika" id="imeKorisnika"> 
 				<br/>

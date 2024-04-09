@@ -21,7 +21,7 @@
 String selectedId = request.getParameter("selectedId");
 
 System.out.println("Selected Row ID: " + selectedId);
-Korisnik kor = korisnikBean.getUserById(selectedId);
+Korisnik kor = korisnikBean.getUserById(Integer.parseInt(selectedId));
 System.out.println(kor.getIme());
 %>
 <body>
@@ -53,9 +53,8 @@ System.out.println(kor.getIme());
 		<div class="row justify-content-center">
 			<div class="col-1"></div>
 			<div class="col-10 info-div">
-				<form method="post" action="?action=updateUser">
-					<label>JMBG</label> <input class="form-control" type="text"
-						name="jmbg" id="jmbg" value="<%=kor.getJMBG()%>"> <br /> <label>Ime</label>
+				<form method="post" action="?action=updateUser-<%=selectedId%>">
+				<label>Ime</label>
 					<input type="text" class="form-control" name="imeKorisnika"
 						id="imeKorisnika" value="<%=kor.getIme()%>"> <br /> <label>Prezime</label>
 					<input type="text" class="form-control" name="prezimeKorisnika"

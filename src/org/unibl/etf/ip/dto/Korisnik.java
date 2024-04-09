@@ -2,7 +2,7 @@ package org.unibl.etf.ip.dto;
 
 public class Korisnik {
 
-	private String JMBG;
+	private int id;
 	private String Ime;
 	private String Prezimme;
 	private String Email;
@@ -13,9 +13,25 @@ public class Korisnik {
 	public Korisnik(){
 		
 	}
-	public Korisnik(String jMBG, String ime, String prezimme, String email, String brojTelefona, String adresa) {
+	public Korisnik(int id, String ime, String prezimme, String email, String brojTelefona, String adresa,Nalog nalogg) {
 		super();
-		JMBG = jMBG;
+		this.id = id;
+		Ime = ime;
+		Prezimme = prezimme;
+		Email = email;
+		BrojTelefona = brojTelefona;
+		Adresa = adresa;
+		nalog = nalogg;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public Korisnik( String ime, String prezimme, String email, String brojTelefona, String adresa) {
+		super();
+		
 		Ime = ime;
 		Prezimme = prezimme;
 		Email = email;
@@ -25,10 +41,10 @@ public class Korisnik {
 	
 	
 
-	public Korisnik(String jMBG, String ime, String prezimme, String email, String brojTelefona, String adresa,
+	public Korisnik( String ime, String prezimme, String email, String brojTelefona, String adresa,
 			Nalog nalogg) {
 		super();
-		JMBG = jMBG;
+	
 		Ime = ime;
 		Prezimme = prezimme;
 		Email = email;
@@ -45,13 +61,9 @@ public class Korisnik {
 	public void setNalog(Nalog nalog) {
 		this.nalog = nalog;
 	}
-	public String getJMBG() {
-		return JMBG;
-	}
+	
 
-	public void setJMBG(String jMBG) {
-		JMBG = jMBG;
-	}
+
 
 	public String getIme() {
 		return Ime;

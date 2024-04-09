@@ -18,24 +18,24 @@ public class KorisnikBean {
 		return KorisnikDAO.getAll();
 	}
 
-	public boolean createUser(String jmbg, String ime, String prezime, String email, String brtelefona, String adresa,
+	public boolean createUser(String ime, String prezime, String email, String brtelefona, String adresa,
 			String korIme, String lozinka) {
 
-		return KorisnikDAO.createUser(new Korisnik(jmbg, ime, prezime, email, brtelefona, adresa), korIme, lozinka);
+		return KorisnikDAO.createUser(new Korisnik(ime, prezime, email, brtelefona, adresa), korIme, lozinka);
 
 	}
 
-	public Korisnik getUserById(String jmbg) {
+	public Korisnik getUserById(Integer id) {
 
-		return KorisnikDAO.getUserById(jmbg);
+		return KorisnikDAO.getUserById(id);
 
-	}
-	
-	public boolean editUser(String jmbg, Korisnik kor) {
-		return KorisnikDAO.updateUser(jmbg, kor);
 	}
 	
-	public boolean deleteUser(String id) {
+	public boolean editUser(Integer id, Korisnik kor) {
+		return KorisnikDAO.updateUser(id, kor);
+	}
+	
+	public boolean deleteUser(Integer id) {
 		return KorisnikDAO.deleteUser(id);
 	}
 
