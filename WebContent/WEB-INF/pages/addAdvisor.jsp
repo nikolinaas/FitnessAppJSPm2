@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Dodavanje korisnika</title>
+<title>Dodavanje savjetnika</title>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -36,7 +36,7 @@
 		<div class="row" style="height: 10%;"></div>
 		<div class="row horizontalline justify-content-center">
 			<label class="labelhorizontal justify-content-center d-flex align-items-center"
-				style="color: aliceblue; font-size: 20px;">Dodavanje novog korisnika</label>
+				style="color: aliceblue; font-size: 20px;">Dodavanje novog savjetnika</label>
 				
 		</div>
 		<div class="row" style="height: 5%;">
@@ -45,7 +45,7 @@
 		<div class="row justify-content-center">
 			<div class="col-1"></div>
 			<div class="col-10 info-div">
-				<form method="post" action="?action=saveUser">
+				<form method="post" action="?action=saveAdvisor">
 				<label>Ime</label>
 				<input type="text" class="form-control" name="imeKorisnika" id="imeKorisnika"> 
 				<br/>

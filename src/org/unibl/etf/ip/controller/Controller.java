@@ -13,13 +13,17 @@ import javax.servlet.http.HttpSession;
 import org.unibl.etf.ip.beans.AdministratorBean;
 import org.unibl.etf.ip.beans.KategorijaBean;
 import org.unibl.etf.ip.beans.KorisnikBean;
+import org.unibl.etf.ip.beans.LogoviBean;
 import org.unibl.etf.ip.beans.NalogBean;
+import org.unibl.etf.ip.beans.SavjetnikBean;
 import org.unibl.etf.ip.dao.AdministratorDAO;
 import org.unibl.etf.ip.dao.KorisnikDAO;
 import org.unibl.etf.ip.dao.NalogDAO;
+import org.unibl.etf.ip.dao.SavjetnikDAO;
 import org.unibl.etf.ip.dto.Kategorija;
 import org.unibl.etf.ip.dto.Korisnik;
 import org.unibl.etf.ip.dto.Nalog;
+import org.unibl.etf.ip.dto.Savjetnik;
 
 @WebServlet("/Controller")
 public class Controller extends HttpServlet {
@@ -49,11 +53,15 @@ public class Controller extends HttpServlet {
 			KategorijaBean kategorijaBean = new KategorijaBean();
 			KorisnikBean korisnikBean = new KorisnikBean();
 			NalogBean nalogBean = new NalogBean();
+			LogoviBean logoviBean= new LogoviBean();
+			SavjetnikBean savjetnikBean = new SavjetnikBean();
 			if (adminBean.LogIn(username, password)) {
+				session.setAttribute("savjetnikBean", savjetnikBean);
 				session.setAttribute("adminBean", adminBean);
 				session.setAttribute("kategorijaBean", kategorijaBean);
 				session.setAttribute("korisnikBean", korisnikBean);
 				session.setAttribute("nalogBean", nalogBean);
+				session.setAttribute("logoviBean", logoviBean);
 				session.setAttribute("notification", "");
 				address = "/WEB-INF/pages/start.jsp";
 			} else {
@@ -78,7 +86,7 @@ public class Controller extends HttpServlet {
 			String categoryName = request.getParameter("nazivKategorije");
 			String categoryDescription = request.getParameter("opisKategorije");
 			if (kategorijaBean.addCategory(categoryName, categoryDescription)) {
-				address = "/WEB-INF/pages/start.jsp";
+				address = "/WEB-INF/pages/start.jsp"; 
 
 			} else {
 				System.out.println("nije prosloooo");
@@ -94,11 +102,32 @@ public class Controller extends HttpServlet {
 			String korIme = request.getParameter("korImeKorisnika");
 			String lozinka = request.getParameter("lozinkaKorisnika");
 			if (korisnikBean.createUser(ime, prezime, email, brTelefona, adresa, korIme, lozinka)) {
+				session.setAttribute("notificationUser", "");
 				address = "/WEB-INF/pages/users.jsp";
 			} else {
+				session.setAttribute("notificationUser", "Korisnicko ime nije jedinstveno, pokusajte ponovo");
+				address = "/WEB-INF/pages/addUser.jsp";
 				System.out.println("nije proslooooooooo");
 			}
-		} else if (action.equals("IzmijeniKorisnika")) {
+		}
+		else if (action.equals("saveAdvisor")) {
+			SavjetnikBean savjetnikbean = (SavjetnikBean) session.getAttribute("savjetnikBean");
+			String ime = request.getParameter("imeKorisnika");
+			String prezime = request.getParameter("prezimeKorisnika");
+			String email = request.getParameter("emailKorisnika");
+			String brTelefona = request.getParameter("brTelefona");
+			String adresa = request.getParameter("adresaKorisnika");
+			String korIme = request.getParameter("korImeKorisnika");
+			String lozinka = request.getParameter("lozinkaKorisnika");
+			if (savjetnikbean.createUser(ime, prezime, email, brTelefona, adresa, korIme, lozinka)) {
+				session.setAttribute("notificationUser", "");
+				address = "/WEB-INF/pages/users.jsp";
+			} else {
+				session.setAttribute("notificationUser", "Korisnicko ime nije jedinstveno, pokusajte ponovo");
+				address = "/WEB-INF/pages/addUser.jsp";
+				System.out.println("nije proslooooooooo");
+			}
+		}else if (action.equals("IzmijeniKorisnika")) {
 
 			address = "/WEB-INF/pages/updateUser.jsp";
 		} else if (action.equals("IzmijeniKategoriju")) {
@@ -134,7 +163,28 @@ public class Controller extends HttpServlet {
 				address = "/WEB-INF/pages/users.jsp";
 			}
 
-		} else if (action.startsWith("obrisiKorisnika")) {
+		}  else if (action.startsWith("updateAdvisor")) {
+			System.out.println(action);
+			String stringId = action.split("-")[1];
+			System.out.println(stringId);
+			SavjetnikBean savjetnikBean = (SavjetnikBean) session.getAttribute("savjetnikBean");
+			System.out.println(savjetnikBean.toString());
+			NalogBean nalogBean = (NalogBean) session.getAttribute("nalogBean");
+			Integer id =Integer.parseInt(stringId);
+			String ime = request.getParameter("imeKorisnika");
+			String prezime = request.getParameter("prezimeKorisnika");
+			String email = request.getParameter("emailKorisnika");
+			String brTelefona = request.getParameter("brTelefona");
+			String adresa = request.getParameter("adresaKorisnika");
+			String korIme = request.getParameter("korImeKorisnika");
+			String lozinka = request.getParameter("lozinkaKorisnika");
+			Nalog nalog = SavjetnikDAO.getUserById(id).getNalog();
+			Savjetnik savjetnik = new Savjetnik( ime, prezime, email, brTelefona, adresa, nalog);
+			if (savjetnikBean.editAdvisor(id, savjetnik) && nalogBean.EditAccount(nalog.getId(), new Nalog(korIme, lozinka))) {
+				address = "/WEB-INF/pages/users.jsp";
+			}
+
+		}else if (action.startsWith("obrisiKorisnika")) {
 			KorisnikBean korisnikBean = (KorisnikBean) session.getAttribute("korisnikBean");
 			String stringId = action.split("-")[1];
 			System.out.println(action);
@@ -150,7 +200,26 @@ public class Controller extends HttpServlet {
 			if (katBean.deleteCategory(Integer.parseInt(stringId))) {
 				address = "/WEB-INF/pages/start.jsp";
 			}
-		}
+		} else if (action.equals("IzmijeniSavjetnika")) {
+			address = "/WEB-INF/pages/updateAdvisor.jsp";
+			
+			
+
+		} else if (action.equals("obrisiSavjetnika")) {
+			SavjetnikBean savjetnikBean = (SavjetnikBean) session.getAttribute("savjetnikBean");
+			String stringId = action.split("-")[1];
+			System.out.println(action);
+		
+			  if(savjetnikBean.deleteAdvisor(Integer.parseInt(stringId))) {
+			  
+			  address = "/WEB-INF/pages/advisers.jsp"; }else {
+			  System.out.println("niej prosloooooooooooooooooo"); }
+			 
+
+		}  else if (action.equals("DodajSavjetnika")) {
+			address = "/WEB-INF/pages/addAdvisor.jsp";
+
+		} 
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher(address);
 		dispatcher.forward(request, response);

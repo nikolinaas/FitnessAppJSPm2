@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html;  charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
-<%@page import="org.unibl.etf.ip.beans.KorisnikBean"%>
-<%@page import="org.unibl.etf.ip.dto.Korisnik"%>
-<jsp:useBean id="korisnikBean"
-	type="org.unibl.etf.ip.beans.KorisnikBean" scope="session"></jsp:useBean>
+<%@page import="org.unibl.etf.ip.beans.SavjetnikBean"%>
+<%@page import="org.unibl.etf.ip.dto.Savjetnik"%>
+<jsp:useBean id="savjetnikBean"
+	type="org.unibl.etf.ip.beans.SavjetnikBean" scope="session"></jsp:useBean>
 	<jsp:useBean id="nalogBean"
 	type="org.unibl.etf.ip.beans.NalogBean" scope="session"></jsp:useBean>
 <!DOCTYPE html>
@@ -21,7 +21,7 @@
 String selectedId = request.getParameter("selectedId");
 
 System.out.println("Selected Row ID: " + selectedId);
-Korisnik kor = korisnikBean.getUserById(Integer.parseInt(selectedId));
+Savjetnik kor = savjetnikBean.getAdvisorById(Integer.parseInt(selectedId));
 System.out.println(kor.getIme());
 %>
 <body>
@@ -57,17 +57,17 @@ System.out.println(kor.getIme());
 		<div class="row justify-content-center">
 			<div class="col-1"></div>
 			<div class="col-10 info-div">
-				<form method="post" action="?action=updateUser-<%=selectedId%>">
+				<form method="post" action="?action=updateAdvisor-<%=selectedId%>">
 				<label>Ime</label>
 					<input type="text" class="form-control" name="imeKorisnika"
 						id="imeKorisnika" value="<%=kor.getIme()%>"> <br /> <label>Prezime</label>
 					<input type="text" class="form-control" name="prezimeKorisnika"
-						id="preimeKorisnika" value="<%=kor.getPrezimme()%>"> <br />
+						id="preimeKorisnika" value="<%=kor.getPrezime()%>"> <br />
 					<label>Email</label> <input type="text" class="form-control"
 						name="emailKorisnika" id="emailKorisnika"
 						value="<%=kor.getEmail()%>"> <br /> <label>Broj
 						telefona</label> <input type="text" class="form-control" name="brTelefona"
-						id="brTelefona" value="<%=kor.getBrojTelefona()%>"> <br />
+						id="brTelefona" value="<%=kor.getBrtelefona()%>"> <br />
 					<label>Adresa</label> <input type="text" class="form-control"
 						name="adresaKorisnika" id="adresaKorisnika"
 						value="<%=kor.getAdresa()%>"> <br /> <label>Korisni&ccaron;ko

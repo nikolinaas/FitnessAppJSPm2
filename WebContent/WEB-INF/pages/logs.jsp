@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import="org.unibl.etf.ip.beans.LogoviBean" %>
+     <%@ page import="org.unibl.etf.ip.dto.Logovi" %>
+    <jsp:useBean id="logoviBean" type="org.unibl.etf.ip.beans.LogoviBean" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,10 +38,35 @@
 
 <div id="logovi" class="col-10 main" >
 <div class="row" style="height:10%;"></div>
-<div class="row horizontalline justify-content-center">
+<div class="row horizontalline justify-content-center align-items-center">
 <label class="labelhorizontal justify-content-center align-items-center" style="color:aliceblue;
-	font-size:20px;">Logovi</label>
+	font-size:20px;">Statistika</label>
 </div>
+	<div id="poruke"
+			class="container justify-content-center align-items-center">
+			<div class="col-1"></div>
+			<div class="col-10" data-spy="scroll"
+				style="justify-content: center; width: 100%; padding: 10px; overflow-y: auto; width: 100%; height: 100%; max-height: 65%; position: absolute; left: 10%;">
+				<%
+				for (Logovi log : logoviBean.getAllLogs()) {
+					
+				%>
+				<div class="card  mb-1 card-read" style="width: 100%;">
+				
+					<div class="card-body">
+					<div class="naslov-class"><%=log.getDatum()%></div>
+						<%=log.getInfo()%>
+					</div>
+				</div>
+				<%
+				
+				}
+				%>
+
+
+			</div>
+			<div class="col-1"></div>
+		</div>
 </div>
 </body>
 </html>

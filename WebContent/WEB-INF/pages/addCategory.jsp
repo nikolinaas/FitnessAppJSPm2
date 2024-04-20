@@ -25,6 +25,10 @@
 				class="nav-link"
 				style="color: white; text-decoration: none; display: flex;">Korisnici</a>
 			</li>
+			<li class="nav-item"><a href="?action=savjetnici"
+				class="nav-link"
+				style="color: white; text-decoration: none; display: flex;">Savjetnici</a>
+			</li>
 			<li class="nav-item"><a href="?action=logovi" class="nav-link "
 				style="color: white; text-decoration: none; display: flex;">Logovi</a>
 			</li>

@@ -4,16 +4,45 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import org.unibl.etf.ip.dto.Logovi;
 import org.unibl.etf.ip.dto.Nalog;
 
 public class NalogDAO {
 	private static ConnectionPool connectionPool = ConnectionPool.getConnectionPool();
+	private static final String SQL_SELECT_ALL_ACCOUNTS = "SELECT * FROM nalog";
 	private static final String SQL_SELECT_ACCOUNT_BY_ID = "SELECT * FROM nalog WHERE IDNALOG = ?";
 	private static final String SQL_INSERT_IN_ACCOUNT = "INSERT INTO nalog (korisnicko_ime, lozinka) VALUES (?,?)";
 	private static final String SQL_UPDATE_ACCOUNT = "UPDATE nalog SET korisnicko_ime = ?, lozinka = ? WHERE (idnalog = ?)";
 	private static final String SQL_DELETE_ACCOUNT = "DELETE FROM nalog WHERE (idnalog = ?)";
 
+	
+	public static ArrayList<Nalog> getAll() {
+		
+		
+		ArrayList<Nalog> res = new ArrayList<Nalog>();
+		
+		Connection connection = null;
+		ResultSet rs = null;
+		Object values[] = {};
+		try {
+			connection = connectionPool.checkOut();
+
+			PreparedStatement pstmt = DAOUtil.prepareStatement(connection, SQL_SELECT_ALL_ACCOUNTS, false, values);
+			rs = pstmt.executeQuery();
+			while (rs.next()) {
+				res.add(new Nalog(rs.getString("korisnicko_ime"), rs.getString("lozinka")));
+			}
+			pstmt.close();
+		} catch (SQLException exp) {
+			exp.printStackTrace();
+		} finally {
+			connectionPool.checkIn(connection);
+		}
+		return res;
+	}
+	
 	public static Nalog createAcc(Nalog nalog) {
 
 		Nalog result = new Nalog();

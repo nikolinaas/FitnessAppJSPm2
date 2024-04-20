@@ -150,3 +150,10 @@ a.btn {
 	font-size: 12px;
 	
 }
+.card-read{
+	background-color: #004466;
+	color: white;
+}
+.card-read:hover{
+	background-color: #006699;
+}

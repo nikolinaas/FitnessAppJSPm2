@@ -3,7 +3,9 @@ package org.unibl.etf.ip.beans;
 import java.util.ArrayList;
 
 import org.unibl.etf.ip.dao.KorisnikDAO;
+import org.unibl.etf.ip.dao.NalogDAO;
 import org.unibl.etf.ip.dto.Korisnik;
+import org.unibl.etf.ip.dto.Nalog;
 
 public class KorisnikBean {
 
@@ -21,7 +23,13 @@ public class KorisnikBean {
 	public boolean createUser(String ime, String prezime, String email, String brtelefona, String adresa,
 			String korIme, String lozinka) {
 
-		return KorisnikDAO.createUser(new Korisnik(ime, prezime, email, brtelefona, adresa), korIme, lozinka);
+		if(isUserNameUnique(korIme)) {
+			System.out.println("jedinstvenooooooooooo");
+			return KorisnikDAO.createUser(new Korisnik(ime, prezime, email, brtelefona, adresa), korIme, lozinka);
+		}else {
+			return false;
+		}
+	
 
 	}
 
@@ -39,4 +47,12 @@ public class KorisnikBean {
 		return KorisnikDAO.deleteUser(id);
 	}
 
+	private boolean isUserNameUnique(String username) {
+		for(Nalog nalog : NalogDAO.getAll()) {
+			if(nalog.getKorisnickoIme().equals(username)) {
+				return false;
+			}
+		}
+		return true;
+	}
 }
